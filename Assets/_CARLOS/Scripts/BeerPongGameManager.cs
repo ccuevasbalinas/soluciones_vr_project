@@ -26,14 +26,7 @@ public class BeerPongGameManager : MonoBehaviour
         _placedCups = _placedCups + 1;
         if(_placedCups == _cupsToPlace) 
         {
-            foreach (GameObject cupSocket in _cupsSockets)
-            {
-                cupSocket.SetActive(false);
-            }
-            foreach (GameObject cup in _playerCups)
-            {
-                DeactivateObjectGrab(cup);
-            }
+            StartCoroutine(PrepareCupsForGame());
             RespawnBall();
             ActivateBeerPongBall();
         }
@@ -60,6 +53,17 @@ public class BeerPongGameManager : MonoBehaviour
         gameObject.GetComponent<XRGrabInteractable>().enabled=true;
     }
 
-    
+    private IEnumerator PrepareCupsForGame()
+    {
+        yield return new WaitForSeconds(2);
+        foreach (GameObject cupSocket in _cupsSockets)
+        {
+            cupSocket.SetActive(false);
+        }
+        foreach (GameObject cup in _playerCups)
+        {
+            DeactivateObjectGrab(cup);
+        }
+    }
 
 }
