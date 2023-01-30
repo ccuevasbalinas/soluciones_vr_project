@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class BeerPongGameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playerBall;
-    [SerializeField] private Transform _playerBallSpawn;
     [SerializeField] private List<GameObject> _playerCups;
     [SerializeField] private List<GameObject> _cupsSockets;
 
     private int _placedCups;
     private int _cupsToPlace;
 
+    private int _remainPlayerCups;
+    private int _remainRivalCups;
 
     private void Awake()
     {
         _placedCups = 0;
-        _cupsToPlace = _playerCups.Count;
+        _cupsToPlace = _remainPlayerCups = _remainRivalCups= _playerCups.Count;
         _playerBall.SetActive(false);
     }
 
@@ -27,30 +29,8 @@ public class BeerPongGameManager : MonoBehaviour
         if(_placedCups == _cupsToPlace) 
         {
             StartCoroutine(PrepareCupsForGame());
-            RespawnBall();
-            ActivateBeerPongBall();
+            _playerBall.SetActive(true);
         }
-    }
-
-    public void ActivateBeerPongBall()
-    {
-        _playerBall.SetActive(true);
-    }
-
-    public void RespawnBall() 
-    {
-        _playerBall.GetComponent<Transform>().position = _playerBallSpawn.position; 
-    }
-
-
-    public void DeactivateObjectGrab(GameObject gameObject)
-    {
-        gameObject.GetComponent<XRGrabInteractable>().enabled = false;
-    }
-
-    public void ActivateObjectGrab(GameObject gameObject) 
-    {
-        gameObject.GetComponent<XRGrabInteractable>().enabled=true;
     }
 
     private IEnumerator PrepareCupsForGame()
@@ -62,8 +42,42 @@ public class BeerPongGameManager : MonoBehaviour
         }
         foreach (GameObject cup in _playerCups)
         {
-            DeactivateObjectGrab(cup);
+            cup.GetComponent<XRGrabInteractable>().enabled = false;
+            cup.GetComponent<Rigidbody>().isKinematic = true;
         }
+    }
+
+    public bool AllPlayerCupsOut()
+    {
+        return _remainPlayerCups == 0;
+    }
+
+    public bool AllRivalCupsOut()
+    {
+        return _remainRivalCups == 0;
+    }
+
+    public void TakeOffPlayerCup()
+    {
+        _remainPlayerCups = _remainPlayerCups - 1;
+        if(AllPlayerCupsOut())
+        {
+            Debug.Log("Gana Rival");
+        }
+    }
+
+    public void TakeOffRivalCup()
+    {
+        _remainRivalCups = _remainRivalCups - 1;
+        if(AllRivalCupsOut()) 
+        {
+            Debug.Log("Gana Jugador");
+        }
+    }
+
+    public void Test()
+    {
+        Debug.Log("Hola");
     }
 
 }

@@ -158,10 +158,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5353025163889770216}
+        m_TargetAssemblyTypeName: BeerPongBall, Assembly-CSharp
+        m_MethodName: SetInHand
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5353025163889770216}
+        m_TargetAssemblyTypeName: BeerPongBall, Assembly-CSharp
+        m_MethodName: SetInHand
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -244,9 +268,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ffea85061c3fc4c81a1573bb76b6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerBall: 0
+  _ballSpawn: {fileID: 0}
   _targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  _resetLayer:
+  _floorLayer:
     serializedVersion: 2
     m_Bits: 0
+  _OnEnterCupEvent: {fileID: 0}
