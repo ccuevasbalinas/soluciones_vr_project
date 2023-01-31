@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Mole
+  - BallBowling
+  - Bowl
   layers:
   - Default
   - TransparentFX
@@ -11,10 +14,10 @@ TagManager:
   - marker
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Beer Pong Cup Player
+  - 'Beer Pong Cup Rival '
+  - Floor
+  - Beer Pong Table
   - 
   - 
   - 
