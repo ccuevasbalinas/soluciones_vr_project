@@ -268,7 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ffea85061c3fc4c81a1573bb76b6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerBall: 0
+  _isPlayerBall: 0
+  _launchSpeed: 10
   _ballSpawn: {fileID: 0}
   _targetLayer:
     serializedVersion: 2
@@ -276,4 +277,8 @@ MonoBehaviour:
   _floorLayer:
     serializedVersion: 2
     m_Bits: 0
-  _OnEnterCupEvent: {fileID: 0}
+  _endOfTurnEvent: {fileID: 11400000, guid: e9beb0cb09aed1641861385b0cd518d6, type: 2}
+  _enterPlayerCupEvent: {fileID: 11400000, guid: 2cf568cc4db574d40ba39fcee8f20b9d,
+    type: 2}
+  _enterRivalCupEvent: {fileID: 11400000, guid: 72c57e7d4b38218458e8291c499f4c7d,
+    type: 2}

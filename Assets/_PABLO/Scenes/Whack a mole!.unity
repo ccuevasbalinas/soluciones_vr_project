@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0058198874, g: 0.016885929, b: 0.028350769, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   - {fileID: 1701044325}
   - {fileID: 1471583846}
   timerEvent: {fileID: 11400000, guid: 1d779cacbf236264183283f44dd48efa, type: 2}
-  _TimeLeft: 0
+  _timeLeft: 0
 --- !u!1001 &136560950
 PrefabInstance:
   m_ObjectHideFlags: 0
