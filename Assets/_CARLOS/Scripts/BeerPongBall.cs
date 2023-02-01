@@ -6,12 +6,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BeerPongBall : MonoBehaviour
 {
     [SerializeField] private bool _isPlayerBall = false;
-    [SerializeField] private float _launchSpeed = 10.0f;
+    [SerializeField] private float _launchSpeed = 5.0f;
     [SerializeField] private Transform _ballSpawn;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _floorLayer;
 
-    [SerializeField] private ScriptableEvent _endOfTurnEvent;
+    [SerializeField] private ScriptableEvent _endOfPlayerTurnEvent;
+    [SerializeField] private ScriptableEvent _endOfRivalTurnEvent;
     [SerializeField] private ScriptableEvent _enterPlayerCupEvent;
     [SerializeField] private ScriptableEvent _enterRivalCupEvent;
 
@@ -31,7 +32,15 @@ public class BeerPongBall : MonoBehaviour
 
     public void EndOfTurn()
     {
-        _endOfTurnEvent.Raise();
+        if(_isPlayerBall)
+        {
+            _endOfPlayerTurnEvent.Raise();
+        }
+        else
+        {
+            _endOfRivalTurnEvent.Raise();
+        }
+        gameObject.SetActive(false);    
     }
 
     private void OnTriggerEnter(Collider other)

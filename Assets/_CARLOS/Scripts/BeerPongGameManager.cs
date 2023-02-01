@@ -17,6 +17,9 @@ public class BeerPongGameManager : MonoBehaviour
     [SerializeField] private GameObject _playerBall;
     [SerializeField] private GameObject _rivalBall;
 
+    [SerializeField] private List<GameObject> _playerCups;
+    [SerializeField] private List<GameObject> _playerCupsSockets;
+
     [SerializeField] private ScriptableEvent StartBeerPongGameEvent;
     [SerializeField] private ScriptableEvent EndBeerPongGameEvent;
 
@@ -32,6 +35,17 @@ public class BeerPongGameManager : MonoBehaviour
         if(_placedCups == _beerPongCups) 
         {
             Debug.Log("Todas los vasos colocados");
+            StartCoroutine(WaitTimeCoroutine(2));
+            foreach (GameObject cupSocket in _playerCupsSockets)
+            {
+                cupSocket.SetActive(false);
+            }
+            foreach (GameObject cup in _playerCups)
+            {
+                cup.GetComponent<XRGrabInteractable>().enabled = false;
+                cup.GetComponent<Rigidbody>().isKinematic = true;
+            }
+            StartCoroutine(WaitTimeCoroutine(2));
             StartBeerPongGameEvent.Raise();
         }
     }
@@ -58,16 +72,18 @@ public class BeerPongGameManager : MonoBehaviour
 
     public void HandleTurn()
     {
+        StartCoroutine(WaitTimeCoroutine(5));
         if(!_endOfGame)
         {
             if (_turnOfPlayer)
             {
-                Debug.Log("Turno del jugador");
+                
                 TurnOfPlayer();
             }
             else
             {
-                Debug.Log("Turno del rival");
+                StartCoroutine(WaitTimeCoroutine(3));
+                
                 TurnOfRival();
             }
         }
@@ -78,24 +94,61 @@ public class BeerPongGameManager : MonoBehaviour
 
     }
 
+    public void DeactivateCurrentBall()
+    {
+        if(_turnOfPlayer)
+        {
+            _rivalBall.SetActive(false);
+        }
+        else
+        {
+            _playerBall.SetActive(false);
+        }
+    }
+
     public void SwitchTurn()
     {
-        _turnOfPlayer = !_turnOfPlayer;
+        if (_turnOfPlayer == true)
+        {
+            _turnOfPlayer = false;
+        }
+        else
+        {
+            _turnOfPlayer = true;
+        }
     }
 
     public void TurnOfPlayer()
     {
-        _playerBall.SetActive(true);
-        _playerBall.GetComponent<BeerPongBall>().ResetBall();
+        if (!_endOfGame)
+        {
+            StartCoroutine(WaitTimeCoroutine(2));
+            Debug.Log("Turno del jugador");
+            _playerBall.SetActive(true);
+            _playerBall.GetComponent<BeerPongBall>().ResetBall();
+        }
+        else
+        {
+            EndBeerPongGameEvent.Raise();
+        }
     }
 
     public void TurnOfRival()
     {
-        _rivalBall.SetActive(true);
-        var rivalBall = _rivalBall.GetComponent<BeerPongBall>();
-        rivalBall.ResetBall();
-        StartCoroutine(WaitTimeCoroutine(1.5f));
-        rivalBall.ParabolicLaunch();
+        if (!_endOfGame)
+        {
+            StartCoroutine(WaitTimeCoroutine(3));
+            Debug.Log("Turno del rival");
+            _rivalBall.SetActive(true);
+            var rivalBall = _rivalBall.GetComponent<BeerPongBall>();
+            rivalBall.ResetBall();
+            StartCoroutine(WaitTimeCoroutine(1.5f));
+            rivalBall.ParabolicLaunch();
+        }
+        else
+        {
+            EndBeerPongGameEvent.Raise();
+        }
     }
 
     private IEnumerator WaitTimeCoroutine(float time)
