@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class BowStrip : MonoBehaviour
+public class BowString : MonoBehaviour
 {
     
     [SerializeField] private Transform endpoint_1, endpoint_2;
