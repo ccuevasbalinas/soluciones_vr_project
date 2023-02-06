@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
+
+    public ScriptableEvent onPinFallen;     // Reference to a scriptable event when the pin's fallen.
+    public ScriptableEvent onUpdateScore;   // Reference to a scriptable event when the pin's fallen and the score must be incremented.
     private bool _hasFalled;                // Boolean used for controlling if the bowl has fallen or not.
-    public ScriptableEvent PinFallenEvent;  // Reference to a scriptable event when the pin's fallen.
+
 
     void Start()
+    {
+        _hasFalled = false;
+    }
+
+    void OnEnable()
     {
         _hasFalled = false;
     }
@@ -19,24 +27,17 @@ public class Pin : MonoBehaviour
         // can be between pins.
         if (collision.gameObject.CompareTag("BallBowling") || collision.gameObject.CompareTag("Pin"))
         {
-            PinFallenEvent.Raise();
-            if (!_hasFalled) { StartCoroutine(HitABowlCoroutine()); }
-        }
-            
+            // Raise the scriptable event of falling a pin for the sound because of it..
+            onPinFallen.Raise();
+
+            // And increment the score by raising another scriptable event.
+            if (!_hasFalled)
+            { 
+                onUpdateScore.Raise(); 
+                _hasFalled = true;
+            }
+        }     
     }
 
-    // Coroutine that handles the trigger process of the player's ball when collides with a bowl.
-    private IEnumerator HitABowlCoroutine()
-    {
-        // If so, increment the score and show it on the screen ...
-        _hasFalled = true;
-        AddScoreAndDisplayIt();
-        yield return null;
-    }
 
-    // Function that incremnts the score and shows by using two digits.
-    private void AddScoreAndDisplayIt()
-    {
-        BowlingGameManager.score++;
-    }
 }

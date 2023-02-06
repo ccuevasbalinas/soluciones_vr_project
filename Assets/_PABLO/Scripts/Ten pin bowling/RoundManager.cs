@@ -1,28 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
-    public static int round = 0;                  // Number of the round of the game.
+    public static int round = 0;                    // Number of the round of the game.
+    public static int maxRounds = 10;               // Number of maximum round of the game.
+    public ScriptableEvent onTimeIsUp;              // Reference to a scriptable event when time's up.
+
     private bool _hasFinished;                      // Boolean used for controlling if a game has finished.
-    public ScriptableEvent timerEvent;              // Reference to a scriptable event when time's up.
+    [SerializeField] private string _sceneToTeleport; // String that allocates te name of the main scene in order to be teleported.   
     
     // Function that controls if the game has finished or not.
+    void Start()
+    {
+        _hasFinished = false;
+    }
 
     void Update()
     {
         // Constantly we're studying if the game has finished or not.
-        if (round > 3 && !_hasFinished) { GameFinshed();}
+        if (round > maxRounds && !_hasFinished) { GameFinshed();}
     }
 
     // Function used to manage the end of the game.
     private void GameFinshed()
     {
-        // If all rounds has completed, the game has finished.
+        // If all rounds has completed, the game has finished and we come back to the main scene.
         _hasFinished = true;
         Debug.Log("fin");
-        timerEvent.Raise();
-        // todo: change to main scene.
+        onTimeIsUp.Raise();
+    }
+
+    // Function that finish the game by calling a coroutine that adds 5 extra seconds between the finishing of the
+    // game and the teleporting process to the main scene
+    public void GameEnds()
+    {
+        StartCoroutine(GameEndsCoroutine());
+    }
+
+
+    private IEnumerator GameEndsCoroutine()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(_sceneToTeleport);
     }
 }

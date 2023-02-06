@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public GameObject[] firstDigitGameObjects;  // Array that contains the '0-9' digits for the first number.
-    public GameObject[] secondDigitGameObjects;  // Array that contains the '0-9' digits for the second number.
-    public ScriptableEvent timerEvent;            // Reference to a scriptable event when time's up.
+    public GameObject[] firstDigitGameObjects;        // Array that contains the '0-9' digits for the first number.
+    public GameObject[] secondDigitGameObjects;       // Array that contains the '0-9' digits for the second number.
+    public ScriptableEvent onTimeIsUp;                // Reference to a scriptable event when time's up.
 
-    [SerializeField]
-    private float _timeLeft;                     // Variable that contains the time left of te mole's game.
-    private bool _hasFinished;                  // Variable that controls if the game is running or not.
+    [SerializeField] private float _timeLeft;         // Variable that contains the time left of te mole's game.
+    private bool _hasStarted;                         // Variable that controls if the game has started or not.
+    private bool _hasFinished;                        // Variable that controls if the game is running or not.
+    [SerializeField] private string _sceneToTeleport; // String that allocates te name of the main scene in order to be teleported.    
     
 
     void Start()
     {
         _hasFinished = false;
+        _hasStarted = false;
     }
 
     void OnEnable()
@@ -25,7 +28,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (!_hasFinished)
+        if (_hasStarted && !_hasFinished)
         {
             if (_timeLeft > 0.0f) 
             {
@@ -34,7 +37,7 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                timerEvent.Raise();
+                onTimeIsUp.Raise();
                 _timeLeft = 0.0f;
                 _hasFinished = true;
             }
@@ -78,5 +81,24 @@ public class Timer : MonoBehaviour
             firstDigitGameObjects[i].SetActive(false); 
             secondDigitGameObjects[i].SetActive(false); 
         }
+    }
+
+    // Function that makes the game starts
+    public void GameStarts()
+    {
+        _hasStarted = true;
+    }
+
+    // Function that finish the game by calling a coroutine that adds 5 extra seconds between the finishing of the
+    // game and the teleporting process to the main scene.
+    public void GameEnds()
+    {
+        StartCoroutine(GameEndsCoroutine());
+    }
+
+    private IEnumerator GameEndsCoroutine()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(_sceneToTeleport);
     }
 }

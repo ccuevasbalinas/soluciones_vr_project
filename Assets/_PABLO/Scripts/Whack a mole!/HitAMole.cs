@@ -44,13 +44,11 @@ public class HitAMole : MonoBehaviour
     {
         // note: the maximum score player can achieve is 99.
         if (_score < 99) { _score++; }
-        Debug.Log("Score: " + _score);
         
         // In case the score is more than 10, the first digit must be '1' and the second one is '0'. 
         // So we need to divide both numbers.
         int[] scoreByDigitsArray = new int[2];
         scoreByDigitsArray = GetDigitsArrayFromScore(_score);
-        Debug.Log("Digits: " + scoreByDigitsArray[0] + "-" + scoreByDigitsArray[1]);
         for (int i = 0; i < firstDigitGameObjects.Length; i++) {
             if (i == scoreByDigitsArray[0]) { firstDigitGameObjects[i].SetActive(true); } 
             if (i == scoreByDigitsArray[1]) { secondDigitGameObjects[i].SetActive(true); } 

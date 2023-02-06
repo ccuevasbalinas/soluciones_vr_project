@@ -7,6 +7,7 @@ TagManager:
   - Mole
   - BallBowling
   - Pin
+  - Piece
   layers:
   - Default
   - TransparentFX

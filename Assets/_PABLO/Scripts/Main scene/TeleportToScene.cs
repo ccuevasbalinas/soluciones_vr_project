@@ -10,6 +10,6 @@ public class TeleportToScene : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // It is needed to check if the triggerer object is a player in order to be teleported to this scene.
-        if (other.CompareTag("Player")) { SceneManager.LoadScene(_scene); }
+        if (other.CompareTag("Player")) SceneManager.LoadScene(_scene); 
     }
 }
