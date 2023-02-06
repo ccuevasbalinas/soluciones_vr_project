@@ -35,4 +35,5 @@ public class GameTimer : MonoBehaviour
         var timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
         return timeString;
     }
+
 }
