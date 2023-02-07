@@ -9,11 +9,7 @@ public class BowStringController : MonoBehaviour
 {
     [SerializeField] private BowString bowStringRenderer; //cuerda del arco 
     private XRGrabInteractable interactable;
-<<<<<<< HEAD
     [SerializeField] private Transform midPointGrabObject;
-=======
-    [SerializeField] Transform midPointGrabObject;
->>>>>>> parent of 7336d7f (bowZ)
     private Transform interactor;
 
     private void Awake(){
@@ -25,7 +21,7 @@ public class BowStringController : MonoBehaviour
         interactable.selectExited.AddListener(ResetBowString);
     }
 
-    private void ResetBowString(SelectExitEventArgs arg0)
+    private void ResetBowString(SelectExitEventArgs hand)
     {
         //vuelve al centro cuando se suelta
         interactor = null;
@@ -42,10 +38,7 @@ public class BowStringController : MonoBehaviour
     private void Update()
     {
         if(interactor != null){
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 7336d7f (bowZ)
             //crea la cuerda de acuerdo al movimiento del midPointGrabObject
             bowStringRenderer.CreateString(midPointGrabObject.transform.position);
         }
