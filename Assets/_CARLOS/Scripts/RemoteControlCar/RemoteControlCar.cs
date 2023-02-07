@@ -13,6 +13,8 @@ public class RemoteControlCar : MonoBehaviour
     [SerializeField] private ScriptableEvent _endRaceTimeEvent;
     [SerializeField] private ScriptableEvent _getCoinEvent;
 
+    [SerializeField] private AudioSource _carAudio;
+
     private Transform _transform;
     private Rigidbody _rigidbody;
     private float _speed = 0.0f;
@@ -25,9 +27,7 @@ public class RemoteControlCar : MonoBehaviour
 
     public void UpdateDirection(float angle)
     {
-        //var vRotation = new Vector3(0.0f, angle, 0.0f);
-        //_transform.rotation = Quaternion.Euler(vRotation);
-        _transform.Rotate(0.0f, angle, 0.0f, Space.Self);
+        _transform.Rotate(0.0f, angle, 0.0f, Space.World);
     }
 
     public void UpdateSpeed(float speed)
@@ -51,6 +51,7 @@ public class RemoteControlCar : MonoBehaviour
         if (_startLineLayer == (1 << other.gameObject.layer | _startLineLayer))
         {
             _startRaceTimeEvent.Raise();
+            _carAudio.Play();
             Debug.Log("Empieza circuito");
         }
         if (_finishLineLayer == (1 << other.gameObject.layer | _finishLineLayer))

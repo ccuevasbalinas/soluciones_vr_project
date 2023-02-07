@@ -14,11 +14,14 @@ public class RemoteControlCarLever : MonoBehaviour
     [SerializeField] private LayerMask _lever4Layer;
     [SerializeField] private LayerMask _lever5Layer;
 
+    [SerializeField] private AudioSource _leverAudio;
+
     private float _angle = 0.0f;
     private float _speed = 0.0f;
 
     private void OnTriggerEnter(Collider other)
     {
+        _leverAudio.Play();
         if (_lever1Layer == (1 << other.gameObject.layer | _lever1Layer))
         {
             if(_isVelocityLever)

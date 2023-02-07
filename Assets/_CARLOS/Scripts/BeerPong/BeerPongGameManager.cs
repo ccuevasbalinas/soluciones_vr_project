@@ -28,7 +28,6 @@ public class BeerPongGameManager : MonoBehaviour
         _beerPongCups = _remainPlayerCups = _remainRivalCups = 6;
     }
 
-    // Game Preparation
     public void PlaceCup()
     {
         _placedCups = _placedCups + 1;
@@ -156,62 +155,4 @@ public class BeerPongGameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
-    /*
-    [SerializeField] private GameObject _playerBall;
-    [SerializeField] private List<GameObject> _playerCups;
-    [SerializeField] private List<GameObject> _cupsSockets;
-
-    private int _cupsToPlace;
-
-    private int _remainPlayerCups;
-    private int _remainRivalCups;
-
-    private void Awake()
-    {
-        _placedCups = 0;
-        _cupsToPlace = _remainPlayerCups = _remainRivalCups= _playerCups.Count;
-        _playerBall.SetActive(false);
-    }
-
-    public void PlaceCup()
-    {
-        _placedCups = _placedCups + 1;
-        if(_placedCups == _cupsToPlace) 
-        {
-            StartCoroutine(PrepareCupsForGame());
-            _playerBall.SetActive(true);
-        }
-    }
-
-    private IEnumerator PrepareCupsForGame()
-    {
-        yield return new WaitForSeconds(2);
-        foreach (GameObject cupSocket in _cupsSockets)
-        {
-            cupSocket.SetActive(false);
-        }
-        foreach (GameObject cup in _playerCups)
-        {
-            cup.GetComponent<XRGrabInteractable>().enabled = false;
-            cup.GetComponent<Rigidbody>().isKinematic = true;
-        }
-    }
-
-    public bool AllPlayerCupsOut()
-    {
-        return _remainPlayerCups == 0;
-    }
-
-    public bool AllRivalCupsOut()
-    {
-        return _remainRivalCups == 0;
-    }
-
-
-
-    public void Test()
-    {
-        Debug.Log("Hola");
-    }
-    */
 }

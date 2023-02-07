@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RemoteControlCarGameManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class RemoteControlCarGameManager : MonoBehaviour
     [SerializeField] private RemoteControlCar _remoteControlCar;
     [SerializeField] private RemoteControlCarLever _velocityLever;
     [SerializeField] private RemoteControlCarLever _directionLever;
+
+    [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private TextMeshProUGUI _textTime;
 
     [SerializeField] private List<GameObject> coins;
 
@@ -21,19 +25,10 @@ public class RemoteControlCarGameManager : MonoBehaviour
 
     void Update()
     {
-        //UpdateCarProperties();
         if (_gameOn)
         {
             _playerTime = Time.time - _startTime;
         }
-    }
-
-    void UpdateCarProperties()
-    {
-        _carDirectionAngle = _directionLever.GetAngle();
-        _remoteControlCar.UpdateDirection(_carDirectionAngle);
-        _carSpeed = _velocityLever.GetSpeed();
-        _remoteControlCar.UpdateSpeed(_carSpeed);
     }
 
     public void SetStartTime()
@@ -70,6 +65,20 @@ public class RemoteControlCarGameManager : MonoBehaviour
     public void ShowScore()
     {
         Debug.Log("Remote control car score: coins -> " + _playerScore + " in time -> " + _playerTime );
+    }
+
+    public void UpdateCanvas()
+    {
+        _textScore.text = "Coins: " + _playerScore.ToString();
+        _textTime.text = "Time: " + FormatTime();
+    }
+
+    public string FormatTime()
+    {
+        var minutes = (int)_playerTime / 60;
+        var seconds = (int)_playerTime % 60;
+        var timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
+        return timeString;
     }
 
 }

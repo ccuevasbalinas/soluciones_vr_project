@@ -6,7 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BeerPongBall : MonoBehaviour
 {
     [SerializeField] private bool _isPlayerBall = false;
-    [SerializeField] private float _launchSpeed = 5.0f;
     [SerializeField] private Transform _ballSpawn;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _floorLayer;
@@ -25,11 +24,6 @@ public class BeerPongBall : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable()
-    {
-        Invoke("EndOfTurn", 30); 
-    }
-
     public void EndOfTurn()
     {
         if(_isPlayerBall)
@@ -45,27 +39,21 @@ public class BeerPongBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Ball triggers cup
         if (_targetLayer == (1 << other.gameObject.layer | _targetLayer))
         {
             if(_isPlayerBall)
             {
-                Debug.Log("PELOTA ENTRA EN CUP DEL RIVAL");
                 _enterRivalCupEvent.Raise();
             }
             else
             {
-                Debug.Log("PELOTA ENTRA EN CUP DEL JUGADOR");
                 _enterPlayerCupEvent.Raise();
             }
             other.gameObject.transform.parent.gameObject.SetActive(false);
             EndOfTurn();
-           
         }
-        // Ball triggers floor
         if (_floorLayer == (1 << other.gameObject.layer | _floorLayer))
         {
-            Debug.Log("PELOTA TOCA EL SUELO");
             EndOfTurn();
         }
     }
@@ -79,15 +67,10 @@ public class BeerPongBall : MonoBehaviour
 
     public void ParabolicLaunch()
     {
-        var angle = Random.Range(30.0f, 60.0f) * Mathf.Deg2Rad;
-
-        var direction = _transform.forward;
-        direction.y = Mathf.Tan(angle);
-        direction = direction.normalized;
-
-        //var direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0.0f);
-
-        _rigidbody.velocity = direction * _launchSpeed;
+        var angle = Random.Range(30.0f, 50.0f);
+        var force = Random.Range(2.0f, 5.0f);
+        var direction = Quaternion.AngleAxis(angle, _transform.right) * _transform.forward;
+        _rigidbody.AddForce(direction * force, ForceMode.Impulse);
     }
 
 }
