@@ -14,51 +14,46 @@ public class Board : MonoBehaviour
     [SerializeField] Collider downLeft;
     [SerializeField] Collider downMid;
     [SerializeField] Collider downRight;
-
-    //[SerializeField] Transform cross1;
-    //[SerializeField] Transform cross2;
-    //[SerializeField] Transform cross3;
-    //[SerializeField] Transform circle1;
-    //[SerializeField] Transform circle2;
-    //[SerializeField] Transform circle3;
-    //private bool isFull = false;
-    //private bool isRed = false;
-
-    private Vector3[,] matrixBoard = new Vector3[3, 3]; //matriz 3x3 tablero
-    [SerializeField] List<GameObject> pieces;
-    private GameObject currentBoardLocation; //cubo del tablero actual
+    private Collider[,] matrixBoard = new Collider[3, 3]; //matriz 3x3 tablero
+    [SerializeField] List<GameObject> pieces; //lista de piezas
+    private Collider currentBoardLocation; //collider del cubo del tablero actual
     private Collider pieceCollider;
-    private bool cross;
+    private bool cross = false;
+    private bool circle = false;
 
-    //[SerializeField] Collider _collider;
     private void Start()
     {
-        //Guarda la posicion de los colliders en una matriz como si fuese un tablero
-        matrixBoard[0, 0] = upLeft.transform.position;
-        matrixBoard[0, 1] = upMid.transform.position;
-        matrixBoard[0, 2] = upRight.transform.position;
-        matrixBoard[1, 0] = midLeft.transform.position;
-        matrixBoard[1, 1] = midMid.transform.position;
-        matrixBoard[1, 2] = midRight.transform.position;
-        matrixBoard[2, 0] = downLeft.transform.position;
-        matrixBoard[2, 1] = downMid.transform.position;
-        matrixBoard[2, 2] = downRight.transform.position;
+        
+        //Guarda los colliders en una matriz como si fuese un tablero
+        matrixBoard[0, 0] = upLeft;
+        matrixBoard[0, 1] = upMid;
+        matrixBoard[0, 2] = upRight;
+        matrixBoard[1, 0] = midLeft;
+        matrixBoard[1, 1] = midMid;
+        matrixBoard[1, 2] = midRight;
+        matrixBoard[2, 0] = downLeft;
+        matrixBoard[2, 1] = downMid;
+        matrixBoard[2, 2] = downRight;
     }
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 3; i++)
+        foreach (GameObject go in pieces)
         {
-            for (int j = 0; j < 3; j++)
+            for (int i = 0; i < 3; i++)
             {
-                currentBoardLocation = this.gameObject;
-                foreach (GameObject go in pieces)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (go.transform.position == currentBoardLocation.transform.position)
+                    currentBoardLocation = matrixBoard[i, j]; 
+                    //si los limites del collider contienen la posicion de la pieza
+                    if (currentBoardLocation.bounds.Contains(go.transform.position))
                     {
-                        Debug.Log("Found a matching position!");
                         pieceCollider = go.GetComponent<Collider>();
                         OnTriggerEnter(pieceCollider);
+
+                        //si la fila tiene la misma pieza linea
+                        //si la columna tiene la misma pieza linea
+                        //si la diagonal tiene la misma pieza linea
                     }
                 }
             }
@@ -75,7 +70,7 @@ public class Board : MonoBehaviour
         if(other.CompareTag("O"))
         {
             Debug.Log("Circulo");
-            cross = false;
+            circle = true;
         }
     }
 }
