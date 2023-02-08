@@ -21,6 +21,10 @@ public class Board : MonoBehaviour
     private bool cross = false;
     private bool circle = false;
 
+    private string [] tagRow = new string [3]; //vector de string que almacena tag de la fila
+    private string[] tagCol = new string[3]; //vector de string que almacena tag de la columna
+    private string[,] tagDia = new string[3,3]; //matriz 3x3 que almacena tag de la diagonal
+
     private void Start()
     {
         
@@ -44,20 +48,58 @@ public class Board : MonoBehaviour
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    currentBoardLocation = matrixBoard[i, j]; 
+                    currentBoardLocation = matrixBoard[i, j];
                     //si los limites del collider contienen la posicion de la pieza
                     if (currentBoardLocation.bounds.Contains(go.transform.position))
                     {
                         pieceCollider = go.GetComponent<Collider>();
                         OnTriggerEnter(pieceCollider);
-
-                        //si la fila tiene la misma pieza linea
-                        //si la columna tiene la misma pieza linea
-                        //si la diagonal tiene la misma pieza linea
+                        tagRow[i] = pieceCollider.tag;
+                        tagCol[j] = pieceCollider.tag;
+                        tagDia[i,j] = pieceCollider.tag;
                     }
                 }
             }
         }
+
+        //CONDICIONES PARA GANAR LA PARTIDA
+        //si la fila tiene la misma pieza
+        if (tagRow[0] == "X" && tagRow[1] == "X" && tagRow[2] == "X")
+        {
+            Debug.Log("Gana fila de X");
+        }
+
+        if (tagRow[0] == "O" && tagRow[1] == "O" && tagRow[2] == "O")
+        {
+            Debug.Log("Gana fila de O");
+        }
+        //si la columna tiene la misma pieza
+        if (tagCol[0] == "X" && tagCol[1] == "X" && tagCol[2] == "X")
+        {
+            Debug.Log("Gana columna de X");
+        }
+        if (tagCol[0] == "O" && tagCol[1] == "O" && tagCol[2] == "O")
+        {
+            Debug.Log("Gana columna de O");
+        }
+        //si la diagonal tiene la misma pieza 
+        if (tagDia[0,0] == "X" && tagDia[1, 1] == "X" && tagDia[2, 2] == "X")
+        {
+            Debug.Log("Gana diagonal de X");
+        }
+        if (tagDia[0, 0] == "O" && tagDia[1, 1] == "O" && tagDia[2, 2] == "O")
+        {
+            Debug.Log("Gana diagonal de O");
+        }
+        if (tagDia[0, 2] == "X" && tagDia[1, 1] == "X" && tagDia[2, 0] == "X")
+        {
+            Debug.Log("Gana diagonal de X");
+        }
+        if (tagDia[0, 2] == "O" && tagDia[1, 1] == "O" && tagDia[2, 0] == "O")
+        {
+            Debug.Log("Gana diagonal de O");
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
