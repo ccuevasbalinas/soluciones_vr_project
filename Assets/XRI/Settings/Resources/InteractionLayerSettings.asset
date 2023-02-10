@@ -16,10 +16,10 @@ MonoBehaviour:
   - Default
   - Teleport
   - Reloading
-  - Gloves
-  - 
-  - 
-  - 
+  - GlovesLeft
+  - GlovesRight
+  - GolfIron
+  - BlackboardPen
   - 
   - 
   - 
