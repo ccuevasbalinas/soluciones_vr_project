@@ -14,16 +14,16 @@ public class Board : MonoBehaviour
     [SerializeField] Collider downLeft;
     [SerializeField] Collider downMid;
     [SerializeField] Collider downRight;
+    [SerializeField] GameObject xWin;
+    [SerializeField] GameObject oWin;
     private Collider[,] matrixBoard = new Collider[3, 3]; //matriz 3x3 tablero
     [SerializeField] List<GameObject> pieces; //lista de piezas
     private Collider currentBoardLocation; //collider del cubo del tablero actual
     private Collider pieceCollider;
-    private bool cross = false;
-    private bool circle = false;
-
     private string [] tagRow = new string [3]; //vector de string que almacena tag de la fila
     private string[] tagCol = new string[3]; //vector de string que almacena tag de la columna
     private string[,] tagDia = new string[3,3]; //matriz 3x3 que almacena tag de la diagonal
+    private Vector3 piecePosition;
 
     private void Start()
     {
@@ -67,37 +67,45 @@ public class Board : MonoBehaviour
         if (tagRow[0] == "X" && tagRow[1] == "X" && tagRow[2] == "X")
         {
             Debug.Log("Gana fila de X");
+            xWin.SetActive(true);
         }
 
         if (tagRow[0] == "O" && tagRow[1] == "O" && tagRow[2] == "O")
         {
             Debug.Log("Gana fila de O");
+            oWin.SetActive(true);
         }
         //si la columna tiene la misma pieza
         if (tagCol[0] == "X" && tagCol[1] == "X" && tagCol[2] == "X")
         {
             Debug.Log("Gana columna de X");
+            xWin.SetActive(true);
         }
         if (tagCol[0] == "O" && tagCol[1] == "O" && tagCol[2] == "O")
         {
             Debug.Log("Gana columna de O");
+            oWin.SetActive(true);
         }
         //si la diagonal tiene la misma pieza 
         if (tagDia[0,0] == "X" && tagDia[1, 1] == "X" && tagDia[2, 2] == "X")
         {
             Debug.Log("Gana diagonal de X");
+            xWin.SetActive(true);
         }
         if (tagDia[0, 0] == "O" && tagDia[1, 1] == "O" && tagDia[2, 2] == "O")
         {
             Debug.Log("Gana diagonal de O");
+            oWin.SetActive(true);
         }
         if (tagDia[0, 2] == "X" && tagDia[1, 1] == "X" && tagDia[2, 0] == "X")
         {
             Debug.Log("Gana diagonal de X");
+            xWin.SetActive(true);
         }
         if (tagDia[0, 2] == "O" && tagDia[1, 1] == "O" && tagDia[2, 0] == "O")
         {
             Debug.Log("Gana diagonal de O");
+            oWin.SetActive(true);
         }
 
     }
@@ -107,12 +115,13 @@ public class Board : MonoBehaviour
         if (other.CompareTag("X"))
         {
             Debug.Log("Cruz");
-            cross = true;
+            piecePosition = other.transform.position;
+            
         }
         if(other.CompareTag("O"))
         {
             Debug.Log("Circulo");
-            circle = true;
+            
         }
     }
 }

@@ -16,7 +16,6 @@ public class BowStringController : MonoBehaviour
     [SerializeField] private GameObject arrow;
     private SelectExitEventArgs hand;
     private float speed = 2f;
-    private float time = 0;
 
     private void Awake(){
         interactable = midPointGrabObject.GetComponent<XRGrabInteractable>();
@@ -58,17 +57,9 @@ public class BowStringController : MonoBehaviour
 
             //si x de la flecha es menor que el x del midPoint
             if(arrow.transform.position.x < midPointGrabObject.position.x)
-            {
-                time += 1;
+            {              
                 //la flecha se mueve
                 arrow.transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
-                /*if(time == 1)
-                {
-                    if(arrow.transform.SetParent != null)
-                    {
-                        arrow.transform.SetParent(null);
-                    }
-                }*/
             }
         }
     }
