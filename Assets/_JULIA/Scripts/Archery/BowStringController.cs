@@ -14,8 +14,8 @@ public class BowStringController : MonoBehaviour
     [SerializeField] private Transform midPointGrabObject;
     private Transform interactor;
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject newArrow;
     private SelectExitEventArgs hand;
-    private float speed = 2f;
 
     private void Awake(){
         interactable = midPointGrabObject.GetComponent<XRGrabInteractable>();
@@ -32,6 +32,10 @@ public class BowStringController : MonoBehaviour
         interactor = null;
         midPointGrabObject.localPosition = Vector3.zero;//posicion local cero corresponde a la posicion inicial en el centro de la cuerda
         bowStringRenderer.CreateString(null);//recrear la cuerda recta
+        arrow.SetActive(false);
+        newArrow.transform.position = arrow.transform.position;
+        newArrow.transform.rotation = arrow.transform.rotation;
+        Instantiate(newArrow);
     }
 
     private void PrepareBowString(SelectEnterEventArgs hand)
@@ -50,17 +54,6 @@ public class BowStringController : MonoBehaviour
 
             //crea la cuerda de acuerdo al movimiento del midPointGrabObject
             bowStringRenderer.CreateString(midPointGrabObject.transform.position);
-        }
-
-        if (arrow.activeInHierarchy) //si la flecha está visible
-        {
-
-            //si x de la flecha es menor que el x del midPoint
-            if(arrow.transform.position.x < midPointGrabObject.position.x)
-            {              
-                //la flecha se mueve
-                arrow.transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
-            }
         }
     }
 }

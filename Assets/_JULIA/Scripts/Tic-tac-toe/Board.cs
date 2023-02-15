@@ -23,7 +23,6 @@ public class Board : MonoBehaviour
     private string [] tagRow = new string [3]; //vector de string que almacena tag de la fila
     private string[] tagCol = new string[3]; //vector de string que almacena tag de la columna
     private string[,] tagDia = new string[3,3]; //matriz 3x3 que almacena tag de la diagonal
-    private Vector3 piecePosition;
 
     private Collider[,] copyMatrix = new Collider[3, 3];
 
@@ -40,6 +39,7 @@ public class Board : MonoBehaviour
         matrixBoard[2, 0] = downLeft;
         matrixBoard[2, 1] = downMid;
         matrixBoard[2, 2] = downRight;
+
     }
     // Update is called once per frame
     void Update()
@@ -56,6 +56,13 @@ public class Board : MonoBehaviour
                     {
                         pieceCollider = go.GetComponent<Collider>();
                         OnTriggerEnter(pieceCollider);
+                        if (pieceCollider.CompareTag("X"))
+                        {
+                            Debug.Log("Cruz");
+                            copyMatrix[i, j] = currentBoardLocation;
+                            
+                        }
+                        copyMatrix[i, j] = currentBoardLocation;
                         tagRow[i] = pieceCollider.tag;
                         tagCol[j] = pieceCollider.tag;
                         tagDia[i,j] = pieceCollider.tag;
@@ -63,7 +70,6 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        copyMatrix = matrixBoard;
 
         //CONDICIONES PARA GANAR LA PARTIDA
         //si la fila tiene la misma pieza
@@ -114,12 +120,11 @@ public class Board : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        
         //comprueba la etiqueta que tiene el collider que entra dentro
         if (other.CompareTag("X"))
         {
             Debug.Log("Cruz");
-            piecePosition = other.transform.position;
-            
         }
         if(other.CompareTag("O"))
         {
