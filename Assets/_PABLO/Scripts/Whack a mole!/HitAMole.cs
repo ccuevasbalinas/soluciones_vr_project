@@ -2,23 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
-/* Script that handles the handling of points when the player's mallet hits a mole, increasing the global 
+/* Script that are in charge of the handling of points when the player's mallet hits a mole, increasing the global 
 variable and making the mole disappear. */
 public class HitAMole : MonoBehaviour
 {
+    #region Variables
+    #region Variables · Public Variables
     public GameObject[] firstDigitGameObjects;  // Array that contains the '0-9' digits for the first number.
     public GameObject[] secondDigitGameObjects;  // Array that contains the '0-9' digits for the second number.
     public ScriptableEvent moleHit;              // Reference to a scriptable event for hitting a mole.
+    public static int highScore = 0;            // Maximum amount of points scored by the player ever.
+    public TMP_Text highScoreCanvas;             // Canvas where the High Score is displayed.
+    #endregion
+
+    #region Variables · Private Variables
     private int _score = 0;                      // Amount of points scored by the player.
     private float _minimumDisableTime = 3.0f;    // Minimum time the mole is 'dead' until he reappears again.
     private float _maximumDisableTime = 7.0f;    // Minimum time the mole is 'dead' until he reappears again.
-
+    #endregion
+    #endregion
+    
+    #region Methods
     void Start()
     {
-        //Reset();
+        highScoreCanvas.text = highScore.ToString();
     }
 
+    // Function that check if a mole has been hit by the mallet's player.
     void OnTriggerEnter(Collider other)
     {
         // It is needed to check if the triggerer object is a mole.
@@ -44,13 +56,14 @@ public class HitAMole : MonoBehaviour
     {
         // note: the maximum score player can achieve is 99.
         if (_score < 99) { _score++; }
-        Debug.Log("Score: " + _score);
+
+        // Does the high score been surpased? Just to update it in real time.
+        CheckHighScore();
         
         // In case the score is more than 10, the first digit must be '1' and the second one is '0'. 
         // So we need to divide both numbers.
         int[] scoreByDigitsArray = new int[2];
         scoreByDigitsArray = GetDigitsArrayFromScore(_score);
-        Debug.Log("Digits: " + scoreByDigitsArray[0] + "-" + scoreByDigitsArray[1]);
         for (int i = 0; i < firstDigitGameObjects.Length; i++) {
             if (i == scoreByDigitsArray[0]) { firstDigitGameObjects[i].SetActive(true); } 
             if (i == scoreByDigitsArray[1]) { secondDigitGameObjects[i].SetActive(true); } 
@@ -85,4 +98,16 @@ public class HitAMole : MonoBehaviour
     {
         moleHit.Raise();
     }
+
+    // Function that checks if the high score has been surpassed or not.
+    private void CheckHighScore()
+    {
+        // When the score is more than the high score, the score is also be saved in _highScore variable.
+        if (highScore < _score)
+        {
+            highScore = _score;
+            highScoreCanvas.text = highScore.ToString();
+        } 
+    }
+    #endregion
 }

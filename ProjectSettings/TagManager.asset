@@ -6,27 +6,22 @@ TagManager:
   tags:
   - Mole
   - BallBowling
-  - Bowl
-  - restart
-  - win
-  - PunchGlove
-  - GolfIron
-  - BlackboardPen
-  - Whiteboard
+  - Pin
+  - Piece
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - marker
+  - 
   - Water
   - UI
   - Beer Pong Cup Player
   - 'Beer Pong Cup Rival '
   - Floor
   - Beer Pong Table
-  - 
-  - 
-  - 
+  - Despawn Disk Wall
+  - Weapon Bullet
+  - Clay Pigeon Disk
   - 
   - 
   - 

@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class LetterAnimation : MonoBehaviour
 {
-    private float orientation = 11.0f;            // Orentation of the letters during the animation.
+    #region (Private) Variables
+    private float _orientation = 11.0f;            // Orentation of the letters during the animation.
     private float _showDuration = 2.5f;           // How long it takes to show the duration.
     private float _duration = 0.25f;              // How long the animation must last.
+    #endregion
 
+    #region Methods
     void Start()
     {
         Vector3 actualRotation = transform.eulerAngles;
-        Quaternion startRotationQ = Quaternion.Euler(actualRotation.x, (actualRotation.y + orientation), actualRotation.z);
-        Quaternion endRotationQ = Quaternion.Euler(actualRotation.x, (actualRotation.y - orientation), actualRotation.z);
+        Quaternion startRotationQ = Quaternion.Euler(actualRotation.x, (actualRotation.y + _orientation), actualRotation.z);
+        Quaternion endRotationQ = Quaternion.Euler(actualRotation.x, (actualRotation.y - _orientation), actualRotation.z);
         StartCoroutine(MakeLetterAnimation(startRotationQ, endRotationQ));
     }
-
 
     // Coroutine that handles the animation of the letters "as a canvas".
     private IEnumerator MakeLetterAnimation(Quaternion start, Quaternion end)
@@ -52,4 +54,5 @@ public class LetterAnimation : MonoBehaviour
             }
         }   
     }
+    #endregion
 }
