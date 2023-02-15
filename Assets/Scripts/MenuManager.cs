@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
     public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
+        Debug.Log("cargando escena...");
     }
+
 
 }

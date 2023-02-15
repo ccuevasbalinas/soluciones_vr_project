@@ -141,7 +141,7 @@ public class BeerPongGameManager : MonoBehaviour
             _rivalBall.SetActive(true);
             var rivalBall = _rivalBall.GetComponent<BeerPongBall>();
             rivalBall.ResetBall();
-            StartCoroutine(WaitTimeCoroutine(1.5f));
+            StartCoroutine(WaitTimeCoroutine(2));
             rivalBall.ParabolicLaunch();
         }
         else
@@ -154,5 +154,4 @@ public class BeerPongGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
     }
-
 }

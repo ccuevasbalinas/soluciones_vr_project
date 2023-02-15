@@ -9,6 +9,7 @@ public class BeerPongBall : MonoBehaviour
     [SerializeField] private Transform _ballSpawn;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private LayerMask _floorLayer;
+    [SerializeField] private LayerMask _controlLayer;
 
     [SerializeField] private ScriptableEvent _endOfPlayerTurnEvent;
     [SerializeField] private ScriptableEvent _endOfRivalTurnEvent;
@@ -17,6 +18,10 @@ public class BeerPongBall : MonoBehaviour
 
     private Transform _transform;
     private Rigidbody _rigidbody;
+
+    private bool _flag = false;
+    private float _controlTime = 0.0f;
+    private float _time = 0.0f;
 
     private void Awake()
     {
@@ -56,6 +61,42 @@ public class BeerPongBall : MonoBehaviour
         {
             EndOfTurn();
         }
+        if (_controlLayer == (1 << other.gameObject.layer | _controlLayer))
+        {
+            if(!_isPlayerBall)
+            {
+                _flag = true;
+                _controlTime = 0.0f;
+                _time = Time.time;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (_controlLayer == (1 << other.gameObject.layer | _controlLayer))
+        {
+            if (!_isPlayerBall)
+            {
+                _flag = false;
+                _controlTime = 0.0f;
+                _time = 0.0f;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (_flag)
+        {
+            _controlTime = Time.time - _time;
+            if (_controlTime == 15.0f)
+            {
+                _flag = false;
+                _controlTime = 0.0f;
+                _time = 0.0f;
+                EndOfTurn();
+            }
+        }
     }
 
     public void ResetBall()
@@ -63,12 +104,13 @@ public class BeerPongBall : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
         _transform.position = _ballSpawn.position;
+        _transform.rotation = _ballSpawn.rotation;
     }
 
     public void ParabolicLaunch()
     {
         var angle = Random.Range(30.0f, 50.0f);
-        var force = Random.Range(2.0f, 5.0f);
+        var force = Random.Range(3.0f, 5.0f);
         var direction = Quaternion.AngleAxis(angle, _transform.right) * _transform.forward;
         _rigidbody.AddForce(direction * force, ForceMode.Impulse);
     }

@@ -1904,7 +1904,7 @@ GameObject:
   - component: {fileID: 509916708}
   - component: {fileID: 509916709}
   m_Layer: 0
-  m_Name: Lever audio
+  m_Name: Race Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1935,7 +1935,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f66b26e2bd0345548bbf972d4cd7e18e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e9ffdd68aeac394cb6efe43d6f9a514, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2710,6 +2710,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 509916709}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4335,7 +4347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108228301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.28, y: -0.5, z: 4.206}
+  m_LocalPosition: {x: 2.59, y: -0.5, z: 4.206}
   m_LocalScale: {x: 0.46365, y: 1, z: 2.037}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7068,6 +7080,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9119369287896522766, guid: 8154c86bd74274c0fa0c887374a7dd6c,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119369287896522766, guid: 8154c86bd74274c0fa0c887374a7dd6c,
+        type: 3}
       propertyPath: m_LineType
       value: 1
       objectReference: {fileID: 0}
@@ -7792,7 +7809,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742813280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.021, y: -0.5, z: 4.206}
+  m_LocalPosition: {x: 4.34, y: -0.5, z: 4.206}
   m_LocalScale: {x: 0.46365, y: 1, z: 2.037}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10012,7 +10029,7 @@ PrefabInstance:
     - target: {fileID: 3849901424819823643, guid: 76405f01703094447a80fe4c22791819,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.17
+      value: 3.43
       objectReference: {fileID: 0}
     - target: {fileID: 3849901424819823643, guid: 76405f01703094447a80fe4c22791819,
         type: 3}
@@ -10022,7 +10039,7 @@ PrefabInstance:
     - target: {fileID: 3849901424819823643, guid: 76405f01703094447a80fe4c22791819,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.164
+      value: 4.09
       objectReference: {fileID: 0}
     - target: {fileID: 3849901424819823643, guid: 76405f01703094447a80fe4c22791819,
         type: 3}
