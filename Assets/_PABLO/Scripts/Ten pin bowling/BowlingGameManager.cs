@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 
-
 public class BowlingGameManager : MonoBehaviour
 {
+    #region Variables
+    #region Variables · Public Variables
     public GameObject[] ballGameObjects;            // Array that contains all balls' game objects.
     public GameObject[] pinGameObjects;             // Array that contains all pins' game objects.
     public ScriptableEvent onPinResetPhysics;       // Reference to a scriptable event when the pin's been reset.
@@ -15,16 +16,23 @@ public class BowlingGameManager : MonoBehaviour
     public ScriptableEvent onBallsReset;            // Reference to the scritable event that reset the transform of the balls.
     public static int indexBallSelected = -1;        // Integer that contains the index of the ball that has been selected.
     public static int score = 0;                    // Amount of points scored by the player.
+    public int highScore = 0;                       // Maximum amount of points scored by the player ever.
     public TMP_Text scoreCanvas;                    // Canvas' text where the score is displayed.
+    public TMP_Text highScoreCanvas;                // Canvas' text where the high score is displayed.
     public TMP_Text[] scoreRoundCanvas;             // Canvas' text where the score is displayed per round.
     public TMP_Text roundCanvas;                    // Canvas' text where the round is displayed.
     public TMP_Text maximumRoundsCanvas;            // Canvas' text where the maximum number of rounds is displayed.
+    #endregion
 
+    #region Variables · Private Variables
     private List<Vector3> _ballOrginalPositions;      // List that contains the original positions of the ball in order to be reseted.
     private List<Vector3> _pinOrginalPositions;      // List that contains the original positions of the pins in order to be reseted.
     private float _tolerance = 0.3f;                 // Minimum magnitude value that will make that a new round starts.
     private int _scoreRound;                        // Private variable int that allocated the number of pins fallen in a round.
-
+    #endregion
+    #endregion
+    
+    #region Methods
     void Awake()
     {
         maximumRoundsCanvas.text = RoundManager.maxRounds.ToString();
@@ -37,8 +45,8 @@ public class BowlingGameManager : MonoBehaviour
         for (int j = 0; j < pinGameObjects.Length; j++) { _pinOrginalPositions.Add(pinGameObjects[j].transform.position); }
 
         _scoreRound = 0;
+        highScoreCanvas.text = highScore.ToString();
     }
-
 
     void Update()
     {
@@ -78,7 +86,6 @@ public class BowlingGameManager : MonoBehaviour
         if(ballSelected.GetComponent<Rigidbody>().velocity.magnitude < _tolerance) { onStartNewRound.Raise(); }
     }
     
-
     // Function that resets the balls and bouls to its original position for a new round.
     public void StartNewRound()
     {
@@ -137,7 +144,16 @@ public class BowlingGameManager : MonoBehaviour
     // Function that increments the score.
     public void UpdateScore()
     {
+        // Update the score of the game and the score of this round.
         score++;
         _scoreRound++;
+
+        // Also, we check if the high score has been surpased. If so, update the high score's variable with the actual score.
+        if (highScore < score)
+        {
+            highScore = score;
+            highScoreCanvas.text = highScore.ToString();
+        }
     }
+    #endregion
 }

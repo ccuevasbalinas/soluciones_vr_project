@@ -5,13 +5,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class SocketChecking : MonoBehaviour
 {
+    #region Variables
+    #region Variables · Public Variable
     public ScriptableEvent onPiecePlacedCorrectly;              // Reference to a scriptable event for placing a piece correctly.
+    #endregion
+
+    #region Variables · Private Variables
     [SerializeField] private string tagPiece;                   // Tag that 'real' pieces of the canvas has.
     private  XRSocketInteractor _socket;
     private int _socketId;
     private bool _checkingPiece;
+    #endregion
+    #endregion
 
-    // Start is called before the first frame update
+    #region Methods
     void Start()
     {
         _socket = GetComponent<XRSocketInteractor>();
@@ -64,4 +71,5 @@ public class SocketChecking : MonoBehaviour
             _checkingPiece = false;
         }    
     }
+    #endregion
 }

@@ -5,14 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
+    #region Variables
+    #region Variables · Public Variables
     public static int round = 0;                    // Number of the round of the game.
     public static int maxRounds = 10;               // Number of maximum round of the game.
     public ScriptableEvent onTimeIsUp;              // Reference to a scriptable event when time's up.
+    #endregion 
 
+    #region Variables · Private Variables
     private bool _hasFinished;                      // Boolean used for controlling if a game has finished.
     [SerializeField] private string _sceneToTeleport; // String that allocates te name of the main scene in order to be teleported.   
-    
-    // Function that controls if the game has finished or not.
+    #endregion
+    #endregion
+
+    #region Methods
     void Start()
     {
         _hasFinished = false;
@@ -40,10 +46,11 @@ public class RoundManager : MonoBehaviour
         StartCoroutine(GameEndsCoroutine());
     }
 
-
+    // Coroutine created for adding five seconds after finishing the game to teleport to the main scene.
     private IEnumerator GameEndsCoroutine()
     {
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(_sceneToTeleport);
     }
+    #endregion
 }

@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
+    #region Variables
+    #region Variables · Public Variables
     public GameObject[] firstDigitGameObjects;        // Array that contains the '0-9' digits for the first number.
     public GameObject[] secondDigitGameObjects;       // Array that contains the '0-9' digits for the second number.
     public ScriptableEvent onTimeIsUp;                // Reference to a scriptable event when time's up.
+    #endregion
 
+    #region Variables · Private Variables
     [SerializeField] private float _timeLeft;         // Variable that contains the time left of te mole's game.
     private bool _hasStarted;                         // Variable that controls if the game has started or not.
     private bool _hasFinished;                        // Variable that controls if the game is running or not.
     [SerializeField] private string _sceneToTeleport; // String that allocates te name of the main scene in order to be teleported.    
-    
+    #endregion
+    #endregion
 
+    #region Methods
     void Start()
     {
         _hasFinished = false;
@@ -44,6 +50,7 @@ public class Timer : MonoBehaviour
         }
     }
 
+    // Function that updates the time left of the game.
     void UpdateTimer(float currentTime)
     {
         currentTime += 1;
@@ -101,4 +108,5 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(_sceneToTeleport);
     }
+    #endregion
 }

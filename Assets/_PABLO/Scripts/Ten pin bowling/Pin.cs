@@ -5,11 +5,18 @@ using UnityEngine;
 public class Pin : MonoBehaviour
 {
 
+    #region Variables
+    #region Variables · Public Variables
     public ScriptableEvent onPinFallen;     // Reference to a scriptable event when the pin's fallen.
     public ScriptableEvent onUpdateScore;   // Reference to a scriptable event when the pin's fallen and the score must be incremented.
+    #endregion
+
+    #region Variables · Private Variable
     private bool _hasFalled;                // Boolean used for controlling if the bowl has fallen or not.
+    #endregion
+    #endregion
 
-
+    #region Methods
     void Start()
     {
         _hasFalled = false;
@@ -38,6 +45,5 @@ public class Pin : MonoBehaviour
             }
         }     
     }
-
-
+    #endregion
 }
