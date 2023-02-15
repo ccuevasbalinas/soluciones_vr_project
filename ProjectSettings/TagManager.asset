@@ -11,6 +11,8 @@ TagManager:
   - win
   - PunchGlove
   - GolfIron
+  - BlackboardPen
+  - Whiteboard
   layers:
   - Default
   - TransparentFX
