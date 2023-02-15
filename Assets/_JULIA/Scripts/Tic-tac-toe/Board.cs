@@ -25,6 +25,8 @@ public class Board : MonoBehaviour
     private string[,] tagDia = new string[3,3]; //matriz 3x3 que almacena tag de la diagonal
     private Vector3 piecePosition;
 
+    private Collider[,] copyMatrix = new Collider[3, 3];
+
     private void Start()
     {
         
@@ -61,6 +63,7 @@ public class Board : MonoBehaviour
                 }
             }
         }
+        copyMatrix = matrixBoard;
 
         //CONDICIONES PARA GANAR LA PARTIDA
         //si la fila tiene la misma pieza
