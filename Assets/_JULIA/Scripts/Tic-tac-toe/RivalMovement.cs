@@ -14,8 +14,8 @@ public class RivalMovement : MonoBehaviour
     [SerializeField] Transform downLeft;
     [SerializeField] Transform downMid;
     [SerializeField] Transform downRight;   
-    private List<Vector3> positionsList; //lista de posiciones del tablero
-    private List<Collider> colliderList;
+    private List<Vector3> positionsList = new List<Vector3>(); //lista de posiciones del tablero
+    private List<Collider> colliderList = new List<Collider>();
     [SerializeField] GameObject cross1;
     [SerializeField] GameObject cross2;
     [SerializeField] GameObject cross3;
