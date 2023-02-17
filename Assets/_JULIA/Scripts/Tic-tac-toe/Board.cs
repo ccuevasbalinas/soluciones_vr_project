@@ -70,7 +70,7 @@ public class Board : MonoBehaviour
         {
             xWin.SetActive(true);
         } 
-        else if ((tagRow[0] == "O" && tagRow[1] == "O" && tagRow[2] == "O") ||
+        if ((tagRow[0] == "O" && tagRow[1] == "O" && tagRow[2] == "O") ||
             (tagCol[0] == "O" && tagCol[1] == "O" && tagCol[2] == "O") ||
             (tagDia[0, 0] == "O" && tagDia[1, 1] == "O" && tagDia[2, 2] == "O") ||
             (tagDia[0, 2] == "O" && tagDia[1, 1] == "O" && tagDia[2, 0] == "O"))
@@ -84,11 +84,11 @@ public class Board : MonoBehaviour
         //comprueba la etiqueta que tiene el collider que entra dentro
         if (other.CompareTag("X"))
         {
-            Debug.Log("Cruz");
+            //Debug.Log("Cruz");
         }
         if (other.CompareTag("O"))
         {
-            Debug.Log("Circulo");
+            //Debug.Log("Circulo");
 
         }
     }

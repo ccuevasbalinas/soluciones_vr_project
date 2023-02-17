@@ -22,7 +22,7 @@ public class RivalMovement : MonoBehaviour
     [SerializeField] GameObject circle1;
     [SerializeField] GameObject circle2;
     [SerializeField] GameObject circle3;
-    private bool piezaJugadorPuesta = false;
+    float t = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +47,6 @@ public class RivalMovement : MonoBehaviour
         colliderList.Add(downLeft.GetComponent<Collider>());
         colliderList.Add(downMid.GetComponent<Collider>());
         colliderList.Add(downRight.GetComponent<Collider>());
-
-        StartCoroutine(waitCoroutine());
     }
     public void Update()
     {
@@ -58,40 +56,53 @@ public class RivalMovement : MonoBehaviour
             {
                 if (collider.bounds.Contains(cross1.transform.position))
                 {
-                    Debug.Log("dentro de cross 1");
-                    positionsList.Remove(position);
+                    //Debug.Log("dentro de cross 1");
+                    //positionsList.Remove(position);
                     int randomIndex = Random.Range(0, positionsList.Count);
-                    piezaJugadorPuesta = true;
-                    circle1.transform.position = positionsList[randomIndex];
+                    if (positionsList[randomIndex] == position)
+                    {
+                        randomIndex = Random.Range(0, positionsList.Count);
+                    }
+                    t += Time.deltaTime;
+                    if(t > 1)
+                    {
+                        circle1.transform.position = positionsList[randomIndex];
+                    }
+                    
                 }
                 if (collider.bounds.Contains(cross2.transform.position))
                 {
-                    Debug.Log("dentro de cross 2");
-                    positionsList.Remove(position);
+                    //Debug.Log("dentro de cross 2");
+                    //positionsList.Remove(position);
                     int randomIndex = Random.Range(0, positionsList.Count);
-                    piezaJugadorPuesta = true;
-                    circle2.transform.position = positionsList[randomIndex];
+                    if (positionsList[randomIndex] == position)
+                    {
+                        randomIndex = Random.Range(0, positionsList.Count);
+                    }
+                    t += Time.deltaTime;
+                    if (t > 5)
+                    {
+                        circle2.transform.position = positionsList[randomIndex];
+                    }
+                    
                 }
                 if (collider.bounds.Contains(cross3.transform.position))
                 {
-                    Debug.Log("dentro de cross 3");
-                    positionsList.Remove(position);
+                    //Debug.Log("dentro de cross 3");
+                    //positionsList.Remove(position);
                     int randomIndex = Random.Range(0, positionsList.Count);
-                    piezaJugadorPuesta = true;
-                    circle3.transform.position = positionsList[randomIndex];
+                    if (positionsList[randomIndex] == position)
+                    {
+                        randomIndex = Random.Range(0, positionsList.Count);
+                    }
+                    t += Time.deltaTime;
+                    if (t > 5)
+                    {
+                        circle3.transform.position = positionsList[randomIndex];
+                    }
+                    
                 }
             }
         }
-    }
-    IEnumerator waitCoroutine()
-    {
-        while (true)
-        {
-            if(piezaJugadorPuesta)
-            {
-                yield return new WaitForSeconds(15);
-            }
-            piezaJugadorPuesta = false;
-        } 
     }
 }
