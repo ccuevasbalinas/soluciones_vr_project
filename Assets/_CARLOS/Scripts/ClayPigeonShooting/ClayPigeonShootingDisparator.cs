@@ -10,8 +10,6 @@ public class ClayPigeonShootingDisparator : MonoBehaviour
     private PoolManager _pool;
     private Transform _transform;
 
-    private bool _shootFlag = false;
-
     private void Awake()
     {
         _transform = GetComponent<Transform>();
@@ -25,13 +23,11 @@ public class ClayPigeonShootingDisparator : MonoBehaviour
 
     public void StartDiskShootingCoroutine()
     {
-        _shootFlag = true;
         StartCoroutine(ShootDiskCoroutine());
     }
 
     public void StopDiskShootingCoroutine()
     {
-        _shootFlag = false;
         StopCoroutine(ShootDiskCoroutine());
     }
 
@@ -42,15 +38,11 @@ public class ClayPigeonShootingDisparator : MonoBehaviour
 
     private IEnumerator ShootDiskCoroutine()
     {
-        while(_shootFlag == true)
+        while(true)
         {
             var t = Random.Range(1.0f, 4.0f);
             yield return new WaitForSeconds(t);
             ShootDisk();
-            if (_shootFlag == false)
-            {
-                break;
-            }
         }
     }
 

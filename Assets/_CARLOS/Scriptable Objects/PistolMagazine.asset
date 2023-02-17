@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PistolMagazine
   m_EditorClassIdentifier: 
   <name>k__BackingField: 9mm
-  <ammo>k__BackingField: 15
+  <ammo>k__BackingField: 9

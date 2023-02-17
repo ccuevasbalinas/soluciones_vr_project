@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class VRButton : MonoBehaviour
 {
-
-    [SerializeField] private AudioSource _audioSource;
-
     public GameObject button;
 
     private bool _isPressed;
@@ -22,7 +19,6 @@ public class VRButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _audioSource.Play();
         if(!_isPressed)
         {
             button.transform.localPosition = new Vector3(0, 0.04f, 0);
@@ -30,9 +26,10 @@ public class VRButton : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnTriggerExit(Collider other)
     {
         button.transform.localPosition = new Vector3(0, 0.05f, 0);
+        OnRelease.Invoke();
         _isPressed = false;
     }
 }

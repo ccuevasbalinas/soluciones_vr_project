@@ -13,7 +13,6 @@ public class GameTimer : MonoBehaviour
         Debug.Log("Counting time...");
         _startTime = Time.time;
         _gameTime = 0.0f;
-        countTime = true;
     }
 
     void Update()
@@ -27,12 +26,6 @@ public class GameTimer : MonoBehaviour
     public void StopCountingTime()
     {
         countTime= false;
-    }
-
-    public string GetTime()
-    {
-        var timeString = FormatTime();
-        return timeString;
     }
 
     public string FormatTime()
