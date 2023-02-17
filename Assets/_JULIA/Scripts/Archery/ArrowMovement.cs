@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArrowMovement : MonoBehaviour
 {
     [SerializeField]private GameObject arrow;
-    private float speed = 2f;
+    private float speed = 3f;
    
     // Update is called once per frame
     void Update()
