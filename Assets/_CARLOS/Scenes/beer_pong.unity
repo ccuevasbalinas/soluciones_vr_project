@@ -2582,7 +2582,7 @@ GameObject:
   - component: {fileID: 345769082}
   - component: {fileID: 345769081}
   m_Layer: 21
-  m_Name: Cube
+  m_Name: Table Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
