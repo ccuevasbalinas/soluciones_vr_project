@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 6f9fb26ae2e725b448157bd357fb3594
+<<<<<<<< HEAD:Assets/_CARLOS/Scripts/RemoteControlCar/RemoteControlCarLever.cs.meta
+guid: 29f1777863535814b96a311d1cf9a290
+========
+guid: 1ae502c11fb6fb64fbc616128f85e730
+>>>>>>>> pruebaJPPablo:Assets/_PABLO/Scripts/Main scene/TeleportToScene.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
