@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83814a29ad1b0649b8346cb93761ed7, type: 3}
-  m_Name: PistolMagazine
+  m_Script: {fileID: 11500000, guid: 8186c71929a9b7843a9cd62c3c372872, type: 3}
+  m_Name: StartRaceTimer
   m_EditorClassIdentifier: 
-  <name>k__BackingField: 9mm
-  <ammo>k__BackingField: 15

@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BeerPongScore : MonoBehaviour
 {
     private int _playerScore = 0;
     private int _rivalScore = 0;
+    private string _gameTime;
+
+    [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private TextMeshProUGUI _textPlayerScore;
+    [SerializeField] private TextMeshProUGUI _textRivalScore;
+    [SerializeField] private TextMeshProUGUI _textGameTime;
     
     public void IncrementPlayerScore()
     {
@@ -21,6 +28,19 @@ public class BeerPongScore : MonoBehaviour
     {
         _playerScore = 0;
         _rivalScore= 0;
+        _gameTime = "";
+    }
+
+    public void SetTimeValue()
+    {
+        _gameTime = _gameTimer.GetTime();
+    }
+
+    public void UpdateCanvas()
+    {
+        _textPlayerScore.text = "Player Score: " + _playerScore.ToString();
+        _textRivalScore.text = "Rival Score: " + _rivalScore.ToString();
+        _textGameTime.text = "Time: " + _gameTime;
     }
 
     public void ShowScore()
