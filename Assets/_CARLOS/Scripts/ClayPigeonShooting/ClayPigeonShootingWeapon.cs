@@ -9,13 +9,9 @@ public class ClayPigeonShootingWeapon : MonoBehaviour
 
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _bulletSpawnTranform;
+    [SerializeField] private AudioSource _audioSource;
 
     private PoolManager _pool;
-
-    private void Awake()
-    {
-        Debug.Log("Weapon awake");
-    }
 
     public void LoadMagazine(IWeaponMagazine mag)
     {
@@ -44,6 +40,7 @@ public class ClayPigeonShootingWeapon : MonoBehaviour
         if (Magazine.UseAmmo())
         {
             _pool.Spawn(_bulletPrefab, _bulletSpawnTranform.position, _bulletSpawnTranform.rotation);
+            _audioSource.Play();
             Debug.Log("FIRE");
         }
         else

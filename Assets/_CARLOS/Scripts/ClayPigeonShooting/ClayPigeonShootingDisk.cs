@@ -27,17 +27,14 @@ public class ClayPigeonShootingDisk : MonoBehaviour
 
     private void OnEnable()
     {
+        _rigidbody.velocity= Vector3.zero;
+        _rigidbody.angularVelocity= Vector3.zero;
         _rigidbody.AddForce(_transform.forward * _speed,ForceMode.Impulse);
     }
 
     private void OnDisable()
     {
         _rigidbody.velocity = Vector3.zero;
-    }
-
-    void Update()
-    {
-        //_rigidbody.velocity = _transform.forward * _speed;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +47,7 @@ public class ClayPigeonShootingDisk : MonoBehaviour
         {
             BulletDestroyDiskEvent.Raise();
             _pool.Despawn(gameObject);
+            _pool.Despawn(other.gameObject);
         }
     }
 }

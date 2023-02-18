@@ -18,18 +18,14 @@ public class ClayPigeonShootingGameManager : MonoBehaviour
     {
         Debug.Log("EMPIEZA RONDA");
         roundActive= true;
-        StartCoroutine(WaitTimeCoroutine(_roundTime));
-        roundActive= false;
-        Debug.Log("FINAL RONDA");
-        EndOfRoundEvent.Raise();
+        StartCoroutine(WaitTimeCoroutine(_roundTime));  
     }
 
-    public void Test()
-    {
-        Debug.Log("Hola");
-    }
     private IEnumerator WaitTimeCoroutine(float t)
     {
         yield return new WaitForSeconds(t);
+        roundActive = false;
+        Debug.Log("FINAL RONDA");
+        EndOfRoundEvent.Raise();
     }
 }
