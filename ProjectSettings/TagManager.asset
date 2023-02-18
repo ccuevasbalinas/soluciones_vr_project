@@ -4,22 +4,24 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - X
-  - O
+  - Mole
+  - BallBowling
+  - Pin
+  - Piece
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Arrow
+  - 
   - Water
   - UI
-  - Pieces
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Beer Pong Cup Player
+  - 'Beer Pong Cup Rival '
+  - Floor
+  - Beer Pong Table
+  - Despawn Disk Wall
+  - Weapon Bullet
+  - Clay Pigeon Disk
   - 
   - 
   - 
