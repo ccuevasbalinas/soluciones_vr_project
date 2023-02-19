@@ -8,7 +8,7 @@ public class WInCanvasVisible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameObject.activeInHierarchy)
+        if (!gameObject.activeSelf)
         {
             winCanvas.SetActive(true);
         }   

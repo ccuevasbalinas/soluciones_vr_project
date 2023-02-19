@@ -7,5 +7,6 @@ public class TargetDisappear : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         gameObject.SetActive(false);
+        ArcheryGameManager.targetcount += 1;
     }
 }

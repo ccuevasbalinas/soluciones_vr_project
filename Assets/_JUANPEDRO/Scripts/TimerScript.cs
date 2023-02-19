@@ -12,9 +12,12 @@ public class TimerScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI TimerText;
     [SerializeField]
-    public float TimeMark = 0;
+    private TextMeshProUGUI bestTimeText;
+    [SerializeField]
+    public float TimeMark;
     private float TimeUp;
     public bool Countdown = false;
+    public static float bestTime = 999999;
 
 
     void Start()
@@ -41,14 +44,24 @@ public class TimerScript : MonoBehaviour
                     TimerOn = false;
 
                     TimerText.transform.parent.gameObject.SetActive(false);
-                    //TimerOver.SetActive(true);
-                    //StartCoroutine(SceneManager(2));
                 }
             }
             else
             {
                 TimeMark += Time.deltaTime;
-                updateTimer(TimeMark);                
+                updateTimer(TimeMark);           
+            }
+        }
+        else
+        {
+            if(TimeMark < bestTime)
+            {
+                bestTime = TimeMark;
+                bestTime += 1;
+                float minutes = Mathf.FloorToInt(bestTime / 60);
+                float seconds = Mathf.FloorToInt(bestTime % 60);
+
+                bestTimeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
             }
         }
     }
@@ -66,14 +79,7 @@ public class TimerScript : MonoBehaviour
             float seconds = Mathf.FloorToInt(currentTime % 60);
 
             TimerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+
         }
     }
-
-
-    //IEnumerator SceneManager(int seconds)
-    //{
-    //    yield return new WaitForSeconds(seconds);
-    //    sceneManager.LoadScene("startMenu");
-
-    //}
 }
