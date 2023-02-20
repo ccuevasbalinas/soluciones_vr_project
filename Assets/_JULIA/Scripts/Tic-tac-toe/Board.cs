@@ -35,9 +35,9 @@ public class Board : MonoBehaviour
     private List<Vector3> positionsList = new List<Vector3>();
 
     public ScriptableEvent onEnemyTurn;
-    private bool checkingPiece = false;
     private int numPiecesPlaced = 0;
     private bool gameFinished = false;
+    [SerializeField] private AudioSource onTable;
 
     private void Start()
     {
@@ -69,10 +69,6 @@ public class Board : MonoBehaviour
         positionsList.Add(downRight.transform.position);
     }
 
-
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -90,6 +86,7 @@ public class Board : MonoBehaviour
                             //si los limites del collider contienen la posicion de la pieza
                             if (currentBoardLocation.bounds.Contains(go.transform.position) && position[Int16.Parse(currentBoardLocation.name) - 1] == false)
                             {
+                                onTable.Play();
                                 pieceCollider = go.GetComponent<Collider>();
                                 OnTriggerEnter(pieceCollider);
                                 tagRow[i] = pieceCollider.tag;
@@ -103,6 +100,7 @@ public class Board : MonoBehaviour
 
                                 go.GetComponent<XRGrabInteractable>().enabled = false;
                                 go.transform.position = currentBoardLocation.transform.position;
+                                onTable.Play();
                             }
                         }
                     }
@@ -165,8 +163,7 @@ public class Board : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        
+    {       
         //comprueba la etiqueta que tiene el collider que entra dentro
         if (other.CompareTag("X"))
         {
@@ -178,6 +175,4 @@ public class Board : MonoBehaviour
 
         }
     }
-
-
 }
