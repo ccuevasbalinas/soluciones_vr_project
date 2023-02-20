@@ -20,6 +20,10 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI hitPoints;
 
     [SerializeField]
+    private TextMeshProUGUI bestHitPoints;
+    public static int bestPointsCount;
+
+    [SerializeField]
     private nextBoard nextBoard;
 
     [SerializeField]
@@ -37,21 +41,24 @@ public class UIManager : MonoBehaviour
             StartCoroutine(ActivateUI());
         }
 
-        if (nextBoard.isFinished == true)
+        if (nextBoard)
         {
-            nextBoard.isFinished = false;
+            if (nextBoard.isFinished == true)
+            {
+                nextBoard.isFinished = false;
 
-            timeBlackBoard.TimerOn = false;
+                timeBlackBoard.TimerOn = false;
 
-            ChallengeUI.SetActive(false);
-            timerChallenge.enabled = false;
-            SummaryUI.SetActive(true);
+                ChallengeUI.SetActive(false);
+                timerChallenge.enabled = false;
+                SummaryUI.SetActive(true);
 
-            timeBlackBoard.TimeMark += 1;
-            float minutes = Mathf.FloorToInt(timeBlackBoard.TimeMark / 60);
-            float seconds = Mathf.FloorToInt(timeBlackBoard.TimeMark % 60);
+                timeBlackBoard.TimeMark += 1;
+                float minutes = Mathf.FloorToInt(timeBlackBoard.TimeMark / 60);
+                float seconds = Mathf.FloorToInt(timeBlackBoard.TimeMark % 60);
 
-            hitPoints.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+                hitPoints.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+            }
         }
     }
 
@@ -77,6 +84,15 @@ public class UIManager : MonoBehaviour
 
             SummaryUI.SetActive(true);
             hitPoints.text = string.Format("{0:00}", hitObjective.pointsCount);
+
+
+            if (hitObjective.pointsCount > bestPointsCount)
+            {
+                bestPointsCount = hitObjective.pointsCount;
+            }
+
+            bestHitPoints.text = string.Format("{0:00}", bestPointsCount);
+            
         }
     }
 

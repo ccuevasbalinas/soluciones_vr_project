@@ -54,14 +54,17 @@ public class TimerScript : MonoBehaviour
         }
         else
         {
-            if(TimeMark < bestTime)
+            if (bestTimeText)
             {
-                bestTime = TimeMark;
-                bestTime += 1;
-                float minutes = Mathf.FloorToInt(bestTime / 60);
-                float seconds = Mathf.FloorToInt(bestTime % 60);
+                if(TimeMark < bestTime)
+                {
+                    bestTime = TimeMark;
+                    bestTime += 1;
+                    float minutes = Mathf.FloorToInt(bestTime / 60);
+                    float seconds = Mathf.FloorToInt(bestTime % 60);
 
-                bestTimeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+                    bestTimeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+                }
             }
         }
     }

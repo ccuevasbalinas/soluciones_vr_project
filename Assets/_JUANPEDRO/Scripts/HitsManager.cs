@@ -11,7 +11,6 @@ public class HitsManager : MonoBehaviour
     public bool start = false;
 
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (challengeUI.activeSelf == true)
