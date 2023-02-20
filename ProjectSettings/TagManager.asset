@@ -8,6 +8,8 @@ TagManager:
   - BallBowling
   - Pin
   - Piece
+  - O
+  - X
   layers:
   - Default
   - TransparentFX
@@ -22,9 +24,9 @@ TagManager:
   - Despawn Disk Wall
   - Weapon Bullet
   - Clay Pigeon Disk
-  - 
-  - 
-  - 
+  - race start line
+  - race end line
+  - race coins
   - 
   - 
   - 

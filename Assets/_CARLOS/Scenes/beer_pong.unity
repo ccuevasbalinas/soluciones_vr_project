@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12075961, g: 0.18638045, b: 0.33532834, a: 1}
+  m_IndirectSpecularColor: {r: 0.12076032, g: 0.18643649, b: 0.3352496, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2618,7 +2618,7 @@ Transform:
   m_GameObject: {fileID: 345769080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.056057043, y: 0.703, z: -0.084}
-  m_LocalScale: {x: 1, y: 0.06114507, z: 1.3769807}
+  m_LocalScale: {x: 1, y: 0.06114507, z: 1.6410855}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -14200,7 +14200,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Main scene
+          m_StringArgument: Main Scene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1881787830
