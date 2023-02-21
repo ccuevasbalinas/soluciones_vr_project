@@ -35,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_CARLOS/Scenes/beer_pong.unity
     guid: 824b3d32bd815f448a158f8040465778
+  - enabled: 1
+    path: Assets/_JUANPEDRO/Scenes/blackBoard.unity
+    guid: 74eb9af98b8cae440b59d5464bf81776
+  - enabled: 1
+    path: Assets/_JUANPEDRO/Scenes/boxing.unity
+    guid: 784936b581dd13446becc59c83da5716
+  - enabled: 1
+    path: Assets/_JUANPEDRO/Scenes/golf.unity
+    guid: ac5a83ac031a27e4ba423412e1503aca
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: dc5d1923dcc01ec4387abbbecc419819,
       type: 2}
